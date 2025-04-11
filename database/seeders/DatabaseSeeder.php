@@ -6,9 +6,11 @@ use App\Models\Game;
 use App\Models\Person;
 use App\Models\Reservation;
 use App\Models\Result;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\TypePersonSeeder;
+use Database\Seeders\PersonSeeder;
+use Database\Seeders\ContactSeeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,12 +19,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => bcrypt('cookie123')
+        ]);
+
+        $this->call([
+            TypePersonSeeder::class,
+            PersonSeeder::class,
+            ContactSeeder::class,
+
         ]);
 
         Person::factory()->create([

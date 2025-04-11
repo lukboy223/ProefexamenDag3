@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Person extends Model
+class TypePerson extends Model
 {
     use HasFactory;
     
     // Map this model to the actual table name
-    protected $table = 'Peopel';
+    protected $table = 'TypePeople';
     
     // Specify the primary key
     protected $primaryKey = 'Id';
@@ -20,19 +20,11 @@ class Person extends Model
     const UPDATED_AT = 'DatumGewijzigd';
     
     // Allow mass assignment
-    protected $fillable = [
-        'TypePeopelId',
-        'FirstName',
-        'Infix',
-        'LastName',
-        'PreferredName',
-        'Adult',
-        'IsActive',
-        'Opmerking'
-    ];
+    protected $fillable = ['Name', 'IsActive', 'Opmerking'];
 
-    // Define the relationship with TypePerson
-    public function typePerson()
+    // Define the relationship with Person
+    public function people()
     {
-        return $this->belongsTo(TypePerson::class, 'TypePeopelId', 'Id');
+        return $this->hasMany(Person::class, 'TypePeopelId', 'Id');
     }
+}

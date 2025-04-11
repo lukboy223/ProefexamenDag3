@@ -3,10 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PersonController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// peopel
+Route::get('/peopel', [PersonController::class, 'index'])->name('peopel.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
