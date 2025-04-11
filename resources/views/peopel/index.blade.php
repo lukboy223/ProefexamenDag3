@@ -30,13 +30,17 @@
                     @else
                     @foreach($peopel as $person)
                         <tr class="text-center hover:bg-gray-50">
-                            <td class="px-4 py-2 border border-gray-300">{{ $person->name }}</td>
-                            <td class="px-4 py-2 border border-gray-300">{{ $person->phone }}</td>
-                            <td class="px-4 py-2 border border-gray-300">{{ $person->email }}</td>
+                        <td class="px-4 py-2 border border-gray-300">
+                            {{ $person->FirstName }} 
+                            {{ $person->Infix }} 
+                            {{ $person->LastName }}
+                        </td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $person->Phone }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $person->Email }}</td>
                             <td class="px-4 py-2 border border-gray-300">
-                                {{ $person->adult ? 'Ja' : 'Nee' }}
+                                {{ $person->Adult ? 'Ja' : 'Nee' }}
                             </td>
-                            <td class="px-4 py-2 border border-gray-300">{{ $person->TypeName }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $person->TypePeopel }}</td>
                         </tr>
                     @endforeach
                     @endif

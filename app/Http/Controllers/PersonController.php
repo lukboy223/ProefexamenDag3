@@ -20,7 +20,7 @@ class PersonController extends Controller
 
         // Probeer de opgeslagen procedure aan te roepen
         try {
-            $peopel = DB::select('CALL Readpeopel(?, ?)', [$perPage, $offset]);
+            $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
         } catch (\Exception $e) {
             \Log::error('Fout bij het oproepen van de stored procedure: ' . $e->getMessage());
             $peopel = [];

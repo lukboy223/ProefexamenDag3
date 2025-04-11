@@ -10,9 +10,9 @@ class TypePersonSeeder extends Seeder
     public function run(): void
     {
         DB::table('TypePeople')->insert([
-            ['Id' => 1, 'Naam' => 'Klant'],
-            ['Id' => 2, 'Naam' => 'Medewerker'],
-            ['Id' => 3, 'Naam' => 'Gast'],
+            ['Id' => 1, 'Name' => 'Klant'],
+            ['Id' => 2, 'Name' => 'Medewerker'],
+            ['Id' => 3, 'Name' => 'Gast'],
         ]);
     }
 }
