@@ -36,4 +36,3 @@ class Person extends Model
     {
         return $this->belongsTo(TypePerson::class, 'TypePeopelId', 'Id');
     }
-}

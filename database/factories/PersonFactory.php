@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+
 use App\Models\TypePerson;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +20,7 @@ class PersonFactory extends Factory
     public function definition(): array
     {
         return [
+
             'TypePeopelId' => TypePerson::factory(),
             'FirstName' => $this->faker->firstName(),
             // Use a shorter infix with max 10 characters
@@ -29,6 +32,7 @@ class PersonFactory extends Factory
             'Opmerking' => $this->faker->sentence(),
             'DatumAangemaakt' => $this->faker->dateTime(),
             'DatumGewijzigd' => $this->faker->dateTime(),
+
         ];
     }
 }
