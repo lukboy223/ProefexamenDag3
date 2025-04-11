@@ -48,6 +48,7 @@ BEGIN
         People ON Reservations.PeopleId = People.Id
     INNER JOIN 
         Lanes ON Reservations.LaneId = Lanes.Id
+        
         ORDER BY Reservations.Datum DESC
     LIMIT p_Offset, p_Limit;
 END;
