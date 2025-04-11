@@ -10,46 +10,41 @@ class PersonController extends Controller
     // overview
     public function index(Request $request)
     {
-        // Variabelen voor paginering
         $perPage = 25;
         $page = $request->input('page', 1);
         $offset = ($page - 1) * $perPage;
-
-        // Haal het totaal aantal personen op (voor paginering)
-        $total = DB::table('peopel')->count();
-
-        // Probeer de opgeslagen procedure aan te roepen
+    
+        $date = $request->input('datum');
+    
         try {
-            $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
+            if ($date) {
+                // Filter op datum (bijv. created_at in je view)
+                $peopel = DB::table('peopel')
+                    ->whereDate('created_at', '=', $date)
+                    ->leftJoin('contacts', 'peopel.id', '=', 'contacts.person_id')
+                    ->leftJoin('typepeople', 'peopel.type_id', '=', 'typepeople.id')
+                    ->select('peopel.name', 'contacts.phone', 'contacts.email', 'peopel.adult', 'typepeople.TypeName', 'peopel.created_at')
+                    ->get();
+            } else {
+                // Gebruik de stored procedure als er geen datum is
+                $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
+            }
         } catch (\Exception $e) {
-            \Log::error('Fout bij het oproepen van de stored procedure: ' . $e->getMessage());
-            $peopel = [];
+            \Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
+            $peopel = collect(); // lege collection
         }
-
-        // Controleer of de procedure bestaat
-        if (empty($peopel)) {
-            \Log::warning('Geen personen gevonden.');
-        }
-
-        // Maak een LengthAwarePaginator object voor paginering
+    
+        // Maak een paginator
+        $total = count($peopel);
         $peopel = new \Illuminate\Pagination\LengthAwarePaginator(
-            $peopel, 
-            $total, 
-            $perPage, 
-            $page, 
-            [
-                'path' => $request->url(),
-                'query' => $request->query(),
-            ]
+            $peopel,
+            $total,
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
         );
-
-        // dd($peopel);
-        
-
-        // // Stel de paginering in voor de zichtbare pagina's
-        // $peopel->onEachSide(1);  // Laat 1 pagina aan elke kant van de huidige pagina zien
-
-        // Retourneer de view met de personen
-        return view('peopel.index', ['peopel' => $peopel]);
+    
+        return view('peopel.index', ['peopel' => $peopel, 'selectedDate' => $date]);
     }
+    
 }
