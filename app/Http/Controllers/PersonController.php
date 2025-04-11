@@ -43,8 +43,11 @@ class PersonController extends Controller
             ]
         );
 
-        // Stel de paginering in voor de zichtbare pagina's
-        $peopel->onEachSide(1);  // Laat 1 pagina aan elke kant van de huidige pagina zien
+        // dd($peopel);
+        
+
+        // // Stel de paginering in voor de zichtbare pagina's
+        // $peopel->onEachSide(1);  // Laat 1 pagina aan elke kant van de huidige pagina zien
 
         // Retourneer de view met de personen
         return view('peopel.index', ['peopel' => $peopel]);
