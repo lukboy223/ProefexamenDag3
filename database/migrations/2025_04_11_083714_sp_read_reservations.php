@@ -36,7 +36,14 @@ return new class extends Migration
         inner join People as PEO
         on RES.PersonId = PEO.Id
 
-        order by RES.Date desc
+        left join Games as GAM
+        on GAM.ReservationId = RES.Id
+
+        left join Results as RESU
+        on RESU.GameId = GAM.Id
+        
+        group by RES.Id
+        order by sum(RESU.AmountPoints) desc
          limit givLIMIT offset givOFFSET;
 
         end
