@@ -16,7 +16,7 @@ return new class extends Migration
         DROP TABLE IF EXISTS TypePeople;
         CREATE TABLE TypePeople (
             Id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            Name VARCHAR(50) NOT NULL,
+            Name ENUM("klant", "medewerker", "gast", "non") NOT NULL,
             IsActive BIT NOT NULL DEFAULT 1,
             Opmerking VARCHAR(250) DEFAULT NULL,
             DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6),

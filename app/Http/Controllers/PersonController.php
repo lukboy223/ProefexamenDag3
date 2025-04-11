@@ -22,8 +22,13 @@ class PersonController extends Controller
         try {
             $peopel = DB::select('CALL Readpeopel(?, ?)', [$perPage, $offset]);
         } catch (\Exception $e) {
-            // Lege array als de procedure niet bestaat of een fout optreedt
+            \Log::error('Fout bij het oproepen van de stored procedure: ' . $e->getMessage());
             $peopel = [];
+        }
+
+        // Controleer of de procedure bestaat
+        if (empty($peopel)) {
+            \Log::warning('Geen personen gevonden.');
         }
 
         // Maak een LengthAwarePaginator object voor paginering
@@ -38,9 +43,8 @@ class PersonController extends Controller
             ]
         );
 
-        // Dump de opgehaalde 'peopel' data om te inspecteren
-        // dd($peopel); // Voeg hier dd() toe om de data te inspecteren voor de view.
-
+        // Stel de paginering in voor de zichtbare pagina's
+        $peopel->onEachSide(1);  // Laat 1 pagina aan elke kant van de huidige pagina zien
 
         // Retourneer de view met de personen
         return view('peopel.index', ['peopel' => $peopel]);
