@@ -16,19 +16,19 @@ class PersonController extends Controller
         $offset = ($page - 1) * $perPage;
 
         // Haal het totaal aantal personen op (voor paginering)
-        $total = DB::table('persons')->count();
+        $total = DB::table('peopel')->count();
 
         // Probeer de opgeslagen procedure aan te roepen
         try {
-            $persons = DB::select('CALL ReadPersons(?, ?)', [$perPage, $offset]);
+            $peopel = DB::select('CALL Readpeopel(?, ?)', [$perPage, $offset]);
         } catch (\Exception $e) {
             // Lege array als de procedure niet bestaat of een fout optreedt
-            $persons = [];
+            $peopel = [];
         }
 
         // Maak een LengthAwarePaginator object voor paginering
-        $persons = new \Illuminate\Pagination\LengthAwarePaginator(
-            $persons, 
+        $peopel = new \Illuminate\Pagination\LengthAwarePaginator(
+            $peopel, 
             $total, 
             $perPage, 
             $page, 
@@ -38,7 +38,11 @@ class PersonController extends Controller
             ]
         );
 
+        // Dump de opgehaalde 'peopel' data om te inspecteren
+        // dd($peopel); // Voeg hier dd() toe om de data te inspecteren voor de view.
+
+
         // Retourneer de view met de personen
-        return view('persons.index', ['persons' => $persons]);
+        return view('peopel.index', ['peopel' => $peopel]);
     }
 }

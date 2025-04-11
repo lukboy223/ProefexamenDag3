@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\TypePerson;
 use App\Models\Person;
 use App\Models\Contact;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => bcrypt('cookie123')
+        ]);
         // Make sure to seed these in the correct order
         TypePerson::factory(10)->create();
         

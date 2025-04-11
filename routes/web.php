@@ -8,8 +8,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// persons
-Route::get('/persons', [PersonController::class, 'index'])->name('persons.index');
+// peopel
+Route::get('/peopel', [PersonController::class, 'index'])->name('peopel.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
