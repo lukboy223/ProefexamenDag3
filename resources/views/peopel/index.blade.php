@@ -19,12 +19,13 @@
                         <th class="px-4 py-2 border border-gray-300">Mobiel</th>
                         <th class="px-4 py-2 border border-gray-300">Email</th>
                         <th class="px-4 py-2 border border-gray-300">Volwassen</th>
+                        <th class="px-4 py-2 border border-gray-300">Type</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if($peopel->isEmpty())
                         <tr>
-                            <td class="px-4 py-2 border border-gray-300 text-center bg-blue-100 align-middle h-16" colspan="4">Er is geen data beschikbaar.</td>
+                            <td class="px-4 py-2 border border-gray-300 text-center bg-blue-100 align-middle h-16" colspan="5">Er is geen data beschikbaar.</td>
                         </tr>
                     @else
                     @foreach($peopel as $person)
@@ -35,6 +36,7 @@
                             <td class="px-4 py-2 border border-gray-300">
                                 {{ $person->adult ? 'Ja' : 'Nee' }}
                             </td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $person->TypeName }}</td>
                         </tr>
                     @endforeach
                     @endif

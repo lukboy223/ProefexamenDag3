@@ -16,14 +16,15 @@ return new class extends Migration
         DROP TABLE IF EXISTS TypePeople;
         CREATE TABLE TypePeople (
             Id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            Name ENUM("klant", "medewerker", "gast", "non") NOT NULL,
+            Name VARCHAR(50) NOT NULL,
             IsActive BIT NOT NULL DEFAULT 1,
             Opmerking VARCHAR(250) DEFAULT NULL,
             DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6),
             DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6),
             PRIMARY KEY (Id)
         ) ENGINE=INNODB;
-        ');
+    ');
+    
     }
 
     /**
