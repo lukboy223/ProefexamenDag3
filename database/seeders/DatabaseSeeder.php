@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\TypePerson as TypePeople;
-use App\Models\Person as People;
-use App\Models\Contact;
+use Database\Seeders\TypePersonSeeder;
+use Database\Seeders\PersonSeeder;
+use Database\Seeders\ContactSeeder;
 use App\Models\User;
 
 class DatabaseSeeder extends Seeder
