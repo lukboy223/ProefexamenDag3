@@ -20,7 +20,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function (){
     Route::get('/Reservaties', [ResultController::class, 'index'])->name('results.index');
-    Route::get('/Reservaties/resultaten', [ResultController::class, 'show'])->name('results.show');
+    Route::get('/Reservaties/resultaten/{id}', [ResultController::class, 'show'])->name('results.show');
+    Route::get('/Reservaties/resultaten/aanpassen/{id}', [ResultController::class, 'edit'])->name('results.edit');
+    Route::patch('/Reservaties/resultaten/update/{id}', [ResultController::class, 'update'])->name('results.update');
 });
 
 require __DIR__.'/auth.php';

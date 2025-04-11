@@ -143,7 +143,7 @@ class DatabaseSeeder extends Seeder
             'AmountHours' => '2',
             'Starttime' => '17:00',
             'EndTime' => '19:00',
-            'AmountAdults' => '4',
+            'AmountAdults' => '2',
             'AmountKids' => null,
         ]);
         Reservation::factory()->create([
@@ -157,7 +157,7 @@ class DatabaseSeeder extends Seeder
             'AmountHours' => '1',
             'Starttime' => '14:00',
             'EndTime' => '15:00',
-            'AmountAdults' => '4',
+            'AmountAdults' => '3',
             'AmountKids' => null,
         ]);
         Reservation::factory()->create([
@@ -171,7 +171,7 @@ class DatabaseSeeder extends Seeder
             'AmountHours' => '2',
             'Starttime' => '19:00',
             'EndTime' => '21:00',
-            'AmountAdults' => '4',
+            'AmountAdults' => '2',
             'AmountKids' =>null,
         ]);
 
