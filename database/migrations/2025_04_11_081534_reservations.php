@@ -19,18 +19,19 @@ return new class extends Migration
         ,PersonId int unsigned not null 
         ,OpeningTimeId int unsigned not null 
         ,LaneId int unsigned not null  
-        ,PackageId int  unsigned not null 
+        ,PackageId int  unsigned null default null
         ,ReservationStatus varchar(50) not null
+        ,ReservationNumber varchar(20) not null
         ,Date date not null
         ,AmountHours tinyint unsigned not null 
         ,Starttime time not null
         ,EndTime time not null
         ,AmountAdults tinyint unsigned not null 
-        ,AmountKids tinyint unsigned not null 
+        ,AmountKids tinyint unsigned null default null
         ,IsActive bit not null default 1
         ,Note varchar(250) null default null
-        ,Create_at datetime(6) not null default now(6)
-        ,Update_at datetime(6) not null default now(6)
+        ,Created_at datetime(6) not null default now(6)
+        ,Updated_at datetime(6) not null default now(6)
         ,primary key (Id)
         ,foreign key (PersonId) references People(Id)
         )engine=innoDB;

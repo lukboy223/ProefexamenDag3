@@ -20,12 +20,13 @@ return new class extends Migration
         ,FirstName varchar(50) not null
         ,Infix varchar(10) null default null
         ,LastName varchar(50) not null
+        ,FullName varchar(110) as (concat_ws(" ", FirstName, Infix, LastName)) stored
         ,CallName varchar(50) not null
         ,IsAdult bit not null
         ,IsActive bit not null default 1
         ,Note varchar(250) null default null
-        ,Create_at datetime(6) not null default now(6)
-        ,Update_at datetime(6) not null default now(6)
+        ,Created_at datetime(6) not null default now(6)
+        ,Updated_at datetime(6) not null default now(6)
         ,primary key (Id)
         )engine=innoDB;
         ');

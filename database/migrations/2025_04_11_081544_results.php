@@ -17,11 +17,11 @@ return new class extends Migration
         create table Results(
          Id int unsigned not null auto_increment
         ,GameId int unsigned not null
-        ,AmountPoints smallint unsigned not null
+        ,AmountPoints smallint unsigned null default null
         ,IsActive bit not null default 1
         ,Note varchar(250) null default null
-        ,Create_at datetime(6) not null default now(6)
-        ,Update_at datetime(6) not null default now(6)
+        ,Created_at datetime(6) not null default now(6)
+        ,Updated_at datetime(6) not null default now(6)
         ,primary key (Id)
         ,foreign key (GameId) references Games(Id)
         )engine=innoDB;
