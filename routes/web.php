@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PersonController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// persons
+Route::get('/persons', [PersonController::class, 'index'])->name('persons.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

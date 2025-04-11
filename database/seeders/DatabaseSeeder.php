@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\TypePerson;
+use App\Models\Person;
+use App\Models\Contact;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Make sure to seed these in the correct order
+        TypePerson::factory(10)->create();
+        
+        // Create people, make sure at least one exists
+        Person::factory(20)->create();
+        
+        // Now create contacts
+        Contact::factory(30)->create();
     }
 }
