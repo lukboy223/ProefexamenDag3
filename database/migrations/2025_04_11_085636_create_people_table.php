@@ -23,8 +23,8 @@ return new class extends Migration
     ,IsAdult BOOLEAN NOT NULL
     ,Isactive bit not null default 1
     ,Note varchar(250) null default null
-    ,DateCreated datetime(6) not null default now(6)
-    ,DateChanged datetime(6) not null default now(6)
+    ,created_at DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,updated_at DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
     ,PRIMARY KEY (Id)
     ,FOREIGN KEY (TypePeopleId) REFERENCES TypePeople(Id)
 ) ENGINE=InnoDB;');

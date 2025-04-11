@@ -16,7 +16,7 @@ return new class extends Migration
        CREATE TABLE Reservations (
     Id INT UNSIGNED AUTO_INCREMENT
     ,PeopleId INT UNSIGNED NOT NULL
-    ,Openingstijd INT NOT NULL
+    ,Openingstijd DATETIME NOT NULL
     ,LaneId INT UNSIGNED NOT NULL
     ,PakketOptieId INT
     ,ReserveringStatus VARCHAR(20) NOT NULL
@@ -29,11 +29,11 @@ return new class extends Migration
     ,AantalKinderen INT
     ,Isactive bit not null default 1
     ,Note varchar(250) null default null
-    ,DateCreated datetime(6) not null default now(6)
-    ,DateChanged datetime(6) not null default now(6)
+    ,created_at DATETIME(6) NOT NULL DEFAULT NOW(6)
+   ,updated_at DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
     ,PRIMARY KEY (Id)
     ,FOREIGN KEY (PeopleId) REFERENCES People(Id)
-    ,FOREIGN KEY (LaneId) REFERENCES Lane(Id)
+    ,FOREIGN KEY (LaneId) REFERENCES Lanes(Id)
 ) ENGINE=InnoDB;
        ');
     }

@@ -24,36 +24,26 @@ class ReservationController extends Controller
 
 
         try {
-            $reservations = DB::table('reservations')
-            ->join('people', 'reservations.PeopleId', '=', 'people.Id')
-            ->join('lane', 'reservations.LaneId', '=', 'lane.Id')
-            ->select(
-                'reservations.*',
-                'people.Name as PeopleName',
-                'lane.Name as LaneName'
-            )
-            ->offset($offset)
-            ->limit($perPage)
-            ->get();
+            $reservations = DB::select('CALL SP_GetReservations(?, ?)', [$offset, $perPage]);
         } catch (\Exception $e) {
-            Log::error('Error fetching reservations: ' . $e->getMessage());
+            Log::error('Error fetching reservations using stored procedure: ' . $e->getMessage());
             $reservations = [];
         }
-        
-        
-        
+
+
+
         if (empty($reservations)) {
             Log::error('Stored procedure returned no data.');
             $reservations = [];
         }
-        
+
         // paginate
         // Paginate the results
         $reservations = new \Illuminate\Pagination\LengthAwarePaginator($reservations, $total, $perPage, $page, [
             'path' => $request->url(),
             'query' => $request->query(),
         ]);
-        dd($reservations);
+        // dd($reservations);
         // Return the view with reservations data
         return view('reservations.index', compact('reservations'));
     }
@@ -86,17 +76,46 @@ class ReservationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit($id, $resId)
+    
+{
+
+    // Find the reservation by ID
+    $reservation = DB::table('Lanes')->where('Id', $id)->first();
+
+    // dd($reservation);
+//    $reservation = DB::unprepared("select laneNumber form Lanes where Id = $id" );
+
+    if (!$reservation) {
+        return redirect()->route('reservations.index')->withErrors(['error' => 'Reservation not found.']);
     }
+
+    // Pass the reservation to the view
+    return view('reservations.edit', compact('reservation', 'resId'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validate the input
+        $request->validate([
+            'lane_number' => 'required|integer|min:1|max:10',
+        ]);
+    
+        try {
+            // Call the stored procedure to update the reservation
+            DB::select('CALL SP_UpdateReservationLane(?, ?)', [$id, $request->input('lane_number')]);
+            
+            // Redirect with success message
+    
+            return redirect()->route('reservations.index')->with('success', 'Lane number updated successfully.');
+        } catch (\Exception $e) {
+            // Log the error and redirect with an error message
+            Log::error('Error updating reservation: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'An error occurred while updating the reservation.']);
+        }
     }
 
     /**

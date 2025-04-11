@@ -18,8 +18,8 @@ return new class extends Migration
         ,Name varchar(50) not null 
         ,Isactive bit not null default 1
         ,Note varchar(250) null default null
-        ,DateCreated datetime(6) not null default now(6)
-        ,DateChanged datetime(6) not null default now(6)
+        ,created_at DATETIME(6) NOT NULL DEFAULT NOW(6)
+        ,updated_at DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
         ,Primary Key (Id)
         )engine=innoDB;');
         

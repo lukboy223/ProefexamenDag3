@@ -19,8 +19,7 @@ class TypePeopleFactory extends Factory
         return [
             //
             'Name' => $this->faker->randomElement(['Klant', 'Medewerker', 'Gast']),
-            'DateCreated' => now(),
-            'DateChanged' => now(),
+
         ];
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\TypePeople;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -18,15 +19,12 @@ class PeopleFactory extends Factory
     {
         return [
             //
-            'Name' => $this->faker->name(),
             'TypePeopleId' => TypePeople::factory(),
             'FirstName' => $this->faker->firstName(),
             'Tussenvoegsel' => $this->faker->optional()->firstname(),
             'LastName' => $this->faker->lastName(),
             'Nickname' => $this->faker->optional()->name(),
             'IsAdult' => $this->faker->boolean(),
-            'DateCreated' => now(),
-            'DateChanged' => now(),
         ];
     }
 }
