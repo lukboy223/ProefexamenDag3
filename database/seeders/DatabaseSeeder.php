@@ -70,6 +70,6 @@ class DatabaseSeeder extends Seeder
             'Number' => 10,
             'HasFence' => true,
         ]);
-        Reservations::factory(30)->create();
+        Reservations::factory(30)->create();f
     }
 }
