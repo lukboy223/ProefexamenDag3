@@ -18,7 +18,7 @@
     @endif
     <div class="overflow-x-auto">
         <form action="{{ route('results.update', $result->Id) }} " method="post"
-            class="w-3/4 bg-white m-auto mt-5 mb-5 p-5 rounded shadow-md just">
+            class="w-3/4 bg-white m-auto mt-5 mb-5 p-5 rounded shadow-md just" style="padding: 1em">
             @method('Patch')
             @csrf
 
@@ -29,7 +29,6 @@
             @error('AmountPoints')
             <p class="text-red-500">{{ $message }}</p>
             @enderror
-
 
             <button type="submit"
                 class="bg-green-700 text-white p-2 rounded hover:bg-green-800 dark:hover:bg-green-900">Opslaan</button>

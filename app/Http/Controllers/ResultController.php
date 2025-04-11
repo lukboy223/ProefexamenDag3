@@ -110,10 +110,10 @@ class ResultController extends Controller
             return view('Results.edit', ['result' => $result[0]]);
 
         } catch (\Exception $e) {
-              // Logs the error if updating fails
+              // Logs the error if asking the data fails
             Log::error('Error loading reservations: ' . $e->getMessage());
 
-            // Redirect terug met een foutmelding
+            //  // Redirects the user back with feedback it failed
             return redirect()->back()->with(
                 'error',
                 'Er is iets misgegaan bij het laden van de score. Probeer het later opnieuw of neem contact op met de beheerder.'
