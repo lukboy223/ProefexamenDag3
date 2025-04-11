@@ -115,7 +115,7 @@ return new class extends Migration
             LEFT JOIN 
                 Contacts c ON p.Id = c.PeopelId
             WHERE 
-                tp.Name = typePeopelName;
+                tp.Id = typePeopelName;
         END
     ');
     }
