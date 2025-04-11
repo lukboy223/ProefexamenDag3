@@ -13,13 +13,13 @@
         <!-- Tabel met alle personen -->
         <div class="overflow-x-auto mx-auto max-w-6xl">
             <table class="table-auto w-full bg-white border-collapse border border-gray-200 shadow-md">
-                <thead style="background-color: #001f3d;" class="text-white">
+                <thead style="background-color:rgb(255, 255, 255);" class="text-white">
                     <tr>
-                        <th class="px-4 py-2 border border-gray-300">Naam</th>
-                        <th class="px-4 py-2 border border-gray-300">Mobiel</th>
-                        <th class="px-4 py-2 border border-gray-300">Email</th>
-                        <th class="px-4 py-2 border border-gray-300">Volwassen</th>
-                        <th class="px-4 py-2 border border-gray-300">Type</th>
+                        <th class="px-4 py-2 text-black border border-gray-300">Naam</th>
+                        <th class="px-4 py-2 text-black border border-gray-300">Mobiel</th>
+                        <th class="px-4 py-2 text-black border border-gray-300">Email</th>
+                        <th class="px-4 py-2 text-black border border-gray-300">Volwassen</th>
+                        <th class="px-4 py-2 text-black border border-gray-300">Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,8 +45,8 @@
                 <!-- Knop naar homepage -->
                 <div class="flex justify-end mt-4">
                 <a href="/"
-                    style="background-color: #001f3d;" 
-                    class="text-white px-6 py-2 rounded font-semibold shadow-md transition">Home pagina</a>
+                    style="background-color:rgb(255, 255, 255);" 
+                    class="text-black px-6 py-2 rounded font-semibold shadow-md transition">Home pagina</a>
             </div>
             <!-- Paginatie Links -->
             <div class="mt-6">
