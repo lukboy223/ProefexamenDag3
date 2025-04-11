@@ -12,11 +12,11 @@ class People extends Model
     protected $table = 'People';
 
     protected $fillable = [
-        'TypePeopleIdd'
-        ,'FirstaaName'
-        ,'Tussfenvoegsel'
+        'TypePeopleId'
+        ,'FirstName'
+        ,'Tussenvoegsel'
         ,'LastName'
-        ,'Nicknaame'
-        ,'IsAdssult'
+        ,'Nickname'
+        ,'IsAdult'
     ];
 }
