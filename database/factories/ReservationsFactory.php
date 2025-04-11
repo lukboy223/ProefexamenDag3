@@ -23,7 +23,7 @@ class ReservationsFactory extends Factory
             //
             'PeopleId' => People::factory(),
             'Openingstijd' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
-            'LaneId' => Lanes::factory(),
+            'LaneId' => $this->faker->randomElement(Lanes::pluck('Id')->toArray()),
             'PakketOptieId' => $this->faker->optional()->randomNumber(1,4),
             'ReserveringStatus' => $this->faker->randomElement(['In behandeling', 'Bevestigd', 'Geannuleerd']),
             'Reserveringsnummer' => $this->faker->unique()->numberBetween(1000, 9999),
