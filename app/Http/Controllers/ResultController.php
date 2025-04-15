@@ -125,7 +125,7 @@ class ResultController extends Controller
 
         //validates the data
         $request->validate([
-            'AmountPoints' => 'required|int|min:0|max:65535'
+            'AmountPoints' => 'required|int|min:0|max:300'
             ]);
 
             //try catch for running the stored procedure
