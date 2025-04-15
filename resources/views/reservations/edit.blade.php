@@ -12,8 +12,17 @@
     
     <div class="mb-4">
         <label for="lane_number" class="block text-gray-700 dark:text-gray-300 font-semibold">Baan Nummer</label>
-        <input type="number" name="lane_number" id="lane_number" value="{{ old('lane_number', $reservation->Number) }}"
-            class="w-full px-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+      <select name="lane_number" id="lane_number" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" required>  
+          <option value="1" @selected(old('lane_number', $reservation->Number) == 1)>1</option>
+          <option value="2" @selected(old('lane_number', $reservation->Number) == 2)>2</option>
+          <option value="3" @selected(old('lane_number', $reservation->Number) == 3)>3</option>
+          <option value="4" @selected(old('lane_number', $reservation->Number) == 4)>4</option>
+          <option value="5" @selected(old('lane_number', $reservation->Number) == 5)>5</option>
+          <option value="6" @selected(old('lane_number', $reservation->Number) == 6)>6</option>
+          <option value="7" @selected(old('lane_number', $reservation->Number) == 7)>7</option>
+          <option value="8" @selected(old('lane_number', $reservation->Number) == 8)>8</option>
+        </select>
+    
             @error('lane_number')
                 <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
             @enderror

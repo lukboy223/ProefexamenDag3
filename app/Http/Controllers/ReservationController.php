@@ -110,7 +110,7 @@ class ReservationController extends Controller
             
             // Redirect with success message
     
-            return redirect()->route('reservations.index')->with('success', 'Lane number updated successfully.');
+            return redirect()->route('reservations.index')->with('success', 'De baannummer is gewijzigd.');
         } catch (\Exception $e) {
             // Log the error and redirect with an error message
             Log::error('Error updating reservation: ' . $e->getMessage());
