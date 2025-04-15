@@ -15,7 +15,7 @@ Route::get('/', function () {
 Route::get('/people', [PersonController::class, 'index'])->name('people.index');
 // people edit en update
 Route::get('/people/edit/{id}', [PersonController::class, 'edit'])->name('people.edit');
-Route::put('/people/update/{id}', [PersonController::class, 'update'])->name('people.update');
+Route::patch('/people/update/{id}', [PersonController::class, 'update'])->name('people.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

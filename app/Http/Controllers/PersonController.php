@@ -7,7 +7,7 @@ use App\Models\Person;
 use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Log;
+
 
 class PersonController extends Controller
 {
@@ -28,17 +28,14 @@ class PersonController extends Controller
                     ->leftJoin('contacts', 'people.id', '=', 'contacts.person_id')
                     ->leftJoin('typepeople', 'people.type_id', '=', 'typepeople.id')
                     ->select('people.name', 'contacts.phone', 'contacts.email', 'people.adult', 'typepeople.TypeName', 'people.created_at')
-                    ->leftJoin('contacts', 'peopel.id', '=', 'contacts.person_id')
-                    ->select('peopel.name', 'contacts.phone', 'contacts.email', 'peopel.adult', 'peopel.created_at'
-                    , 'peopel.Id')
+                    ->leftJoin('contacts', 'people.id', '=', 'contacts.person_id')
+                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.adult', 'people.created_at'
+                    , 'people.Id')
                     ->get();
             } else {
                 // Gebruik de stored procedure als er geen datum is
                 $people = DB::select('CALL GetAllpeopleWithContactInfo()');
-                } else {
-                    // Gebruik de stored procedure als er geen datum is
-                    $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
-                    // dd($peopel);
+                
             }
         } catch (\Exception $e) {
             Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
@@ -46,8 +43,8 @@ class PersonController extends Controller
         }
         // Debugging: Uncomment the line below to see the SQL query
         // dd($query->toSql(), $query->getBindings());
-        // dd($peopel);
-        //dd($peopel->first()->contacts);
+        // dd($people);
+        //dd($people->first()->contacts);
         // Maak een paginator
         $total = count($people);
         $people = new \Illuminate\Pagination\LengthAwarePaginator(
@@ -57,6 +54,8 @@ class PersonController extends Controller
             $page,
             ['path' => $request->url(), 'query' => $request->query()]
         );
+
+        // dd($people);
     
         return view('people.index', ['people' => $people, 'selectedDate' => $date]);
     }
@@ -64,24 +63,24 @@ class PersonController extends Controller
     public function edit($id)
     {
         // Use 'Id' with capital I to match your database column
-        $person = DB::table('peopel')->where('Id', $id)->first();
+        $person = DB::table('people')->where('Id', $id)->first();
         // tables joinen
-        $person = DB::table('peopel')
-            ->leftJoin('contacts', 'peopel.Id', '=', 'contacts.PeopelId')
-            ->leftJoin('typepeople', 'peopel.TypePeopelId', '=', 'typepeople.Id')
-            ->select('peopel.*', 'contacts.Phone', 'contacts.Email', 'typepeople.Name as TypePeopel')
-            ->where('peopel.Id', $id)
+        $person = DB::table('people')
+            ->leftJoin('contacts', 'people.Id', '=', 'contacts.peopleId')
+            ->leftJoin('typepeople', 'people.TypepeopleId', '=', 'typepeople.Id')
+            ->select('people.*', 'contacts.Phone', 'contacts.Email', 'typepeople.Name as Typepeople')
+            ->where('people.Id', $id)
             ->first();
         // Debugging: Uncomment the line below to see the SQL query
         // dd($person);
         
         // If person doesn't exist, redirect back with error
         if (!$person) {
-            return redirect()->route('peopel.index')->with('error', 'Person not found');
+            return redirect()->route('people.index')->with('error', 'Person not found');
         }
         
         // Pass the person to the view
-        return view('peopel.edit', compact('person'));
+        return view('people.edit', compact('person'));
     }
 
     // Bijwerken van de gegevens van een persoon
@@ -104,7 +103,7 @@ class PersonController extends Controller
             // Controleer of het e-mailadres al bestaat bij een andere klant
             $emailExists = DB::table('contacts')
                 ->where('Email', $validatedData['Email'])
-                ->where('PeopelId', '!=', $id)
+                ->where('peopleId', '!=', $id)
                 ->exists();
     
             if ($emailExists) {
@@ -114,8 +113,8 @@ class PersonController extends Controller
                     ->withErrors(['Email' => 'Het e-mailadres is al in gebruik']);
             }
     
-            // Update de peopel-tabel
-            DB::table('peopel')->where('Id', $id)->update([
+            // Update de people-tabel
+            DB::table('people')->where('Id', $id)->update([
                 'FirstName' => $validatedData['FirstName'],
                 'Infix' => $validatedData['Infix'],
                 'LastName' => $validatedData['LastName'],
@@ -123,12 +122,12 @@ class PersonController extends Controller
             ]);
     
             // Update de contacts-tabel
-            DB::table('contacts')->where('PeopelId', $id)->update([
+            DB::table('contacts')->where('peopleId', $id)->update([
                 'Phone' => $validatedData['Phone'],
                 'Email' => $validatedData['Email'],
             ]);
     
-            return redirect()->route('peopel.index')->with('success', 'Persoon succesvol bijgewerkt');
+            return redirect()->route('people.index')->with('success', 'Persoon succesvol bijgewerkt');
     
         } catch (\Exception $e) {
             Log::error('Fout bij updaten: ' . $e->getMessage());

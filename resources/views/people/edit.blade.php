@@ -23,9 +23,9 @@
 
             <!-- Edit formulier -->
             <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-                <form method="POST" action="{{ route('peopel.update', ['id' => $person->Id]) }}" class="space-y-6">
+                <form method="POST" action="{{ route('people.update', ['id' => $person->Id]) }}" class="space-y-6">
                     @csrf
-                    @method('PATCH') <!-- Deze regel ontbreekt nu -->
+                    @method('Patch') <!-- Deze regel ontbreekt nu -->
 
                     <!-- Naam velden -->
                     <div class="grid grid-cols-3 gap-4">
@@ -66,7 +66,7 @@
                     <!-- Adult checkbox -->
                     <div>
                         <label class="inline-flex items-center">
-                            <input type="checkbox" name="Adult" value="{{ old('Adult', $person->Adult) ? 'checked' : '' }}"
+                            <input type="checkbox" name="Adult" value="{{ old('Adult', $person->IsAdult) ? 'checked' : '' }}"
                                 class="rounded border-gray-300 text-bordeaux focus:border-bordeaux focus:ring focus:ring-bordeaux focus:ring-opacity-50" required >
                             <span class="ml-2">Volwassen</span>
                         </label>
@@ -74,7 +74,7 @@
                     
                     <!-- Knoppen -->
                     <div class="flex justify-between pt-4">
-                        <a href="{{ route('peopel.index') }}" class="bg-white text-black px-6 py-2 rounded-lg shadow-md hover:bg-gray-200 transition duration-300">
+                        <a href="{{ route('people.index') }}" class="bg-white text-black px-6 py-2 rounded-lg shadow-md hover:bg-gray-200 transition duration-300">
                             Terug
                         </a>
                         <button type="submit" class="bg-bordeaux text-black px-6 py-2 rounded-lg shadow-md hover:bg-bordeaux-dark transition duration-300">

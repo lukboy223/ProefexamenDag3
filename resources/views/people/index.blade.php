@@ -41,14 +41,14 @@
                                 </td>
                             </tr>
                         @else
-                        @foreach($peopel as $person)
+                        @foreach($people as $person)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 border py-3 text-black">{{ $person->FirstName }} {{ $person->Infix }} {{ $person->LastName }}</td>
                                 <td class="px-6 border py-3 text-black">{{ $person->Phone ?? '-' }}</td>
                                 <td class="px-6 border py-3 text-black">{{ $person->Email ?? '-' }}</td>
                                 <td class="px-6 border py-3 text-black">{{ $person->Adult ? 'Ja' : 'Nee' }}</td>
                                 <td class="px-6 border py-3 text-black">
-                                    <a href="{{ route('peopel.edit', ['id' => $person->PeopelId]) }}" class="text-blue-500 hover:text-blue-700">Aanpassen</a>
+                                    <a href="{{ route('people.edit', ['id' => $person->PeopleId]) }}" class="text-blue-500 hover:text-blue-700">Aanpassen</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- <div class="mt-6">
-                    {{ $peopel->links() }}
+                    {{ $people->links() }}
                 </div> -->
 
             </div>
