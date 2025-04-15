@@ -23,7 +23,7 @@ class PeopleFactory extends Factory
             'FirstName' => $this->faker->firstName(),
             'Tussenvoegsel' => $this->faker->optional()->firstname(),
             'LastName' => $this->faker->lastName(),
-            'Nickname' => $this->faker->optional()->name(),
+            'CallName' => $this->faker->optional()->name(),
             'IsAdult' => $this->faker->boolean(),
         ];
     }

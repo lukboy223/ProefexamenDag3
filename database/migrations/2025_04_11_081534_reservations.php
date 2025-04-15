@@ -25,7 +25,7 @@ return new class extends Migration
         ,ReservationNumber varchar(20) not null
         ,Date date not null
         ,AmountHours tinyint unsigned not null 
-        ,Starttime time not null
+        ,StartTime time not null
         ,EndTime time not null
         ,AmountAdults tinyint unsigned not null 
         ,AmountKids tinyint unsigned null default null

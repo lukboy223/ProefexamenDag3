@@ -11,16 +11,16 @@ class Reservations extends Model
     protected $table = 'Reservations';
     protected $fillable = [
         'PeopleId',
-        'Openingstijd',
+        'OpeningTimeId',
         'LaneId',
-        'PakketOptieId',
-        'ReserveringStatus',
-        'Reserveringsnummer',
-        'Datum',
-        'AantalUren',
-        'BeginTijd',
-        'EindTijd',
-        'AantalVolwassen',
-        'AantalKinderen',
+        'PackageId',
+        'ReservationStatus',
+        'Reservationsnummer',
+        'Date',
+        'AmmountHours',
+        'StartTime',
+        'EndTime',
+        'AmmountAdults',
+        'AmmountKids',
     ];
 }

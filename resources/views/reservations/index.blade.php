@@ -76,22 +76,22 @@
                                 {{ $reservation->FullName }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
-                                {{ $reservation->Datum }}
+                                {{ $reservation->Date }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
-                                {{ $reservation->AantalUren }}
+                                {{ $reservation->AmountHours }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
-                                {{ $reservation->BeginTijd }}
+                                {{ $reservation->StartTime }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
-                                {{ $reservation->EindTijd }}
+                                {{ $reservation->EndTime }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
-                                {{ $reservation->AantalVolwassen }}
+                                {{ $reservation->AmountAdults }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
-                                {{ $reservation->AantalKinderen }}
+                                {{ $reservation->AmountKids }}
                             </td>
                             <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-700 border-r">
                                 {{ $reservation->LaneNumber }}

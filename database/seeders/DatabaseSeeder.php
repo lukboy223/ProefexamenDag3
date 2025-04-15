@@ -17,7 +17,6 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\TypePersonSeeder;
 use Database\Seeders\PersonSeeder;
 use Database\Seeders\ContactSeeder;
-use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,8 +28,8 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(10)->create();
         // Lanes::factory(30)->create();
-        TypePeople::factory(30)->create();
-        People::factory(30)->create();
+        // TypePeople::factory(30)->create();
+        // People::factory(30)->create();
        
 
      
@@ -75,7 +74,7 @@ class DatabaseSeeder extends Seeder
             'Number' => 10,
             'HasFence' => true,
         ]);
-        Reservations::factory(30)->create();
+        
 
         User::factory()->create([
             'name' => 'Test User',

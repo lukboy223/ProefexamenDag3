@@ -81,7 +81,7 @@ class ResultController extends Controller
 
             //redirect the user to the index page with all the results
             if($results->isEmpty()){
-                return redirect()->route('results.index')->with('error', 'Geen scores bij deze reservering gevonden');
+                return redirect()->route('results.index')->with('error', 'Geen scores bij deze Reservation gevonden');
             }
 
             return view('Results.show', ['results' => $results]);

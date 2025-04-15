@@ -14,9 +14,9 @@ class People extends Model
     protected $fillable = [
         'TypePeopleId'
         ,'FirstName'
-        ,'Tussenvoegsel'
+        ,'Infix'
         ,'LastName'
-        ,'Nickname'
-        ,'IsAdult'
+        ,'CallName'
+        ,'IsAdult'  
     ];
 }
