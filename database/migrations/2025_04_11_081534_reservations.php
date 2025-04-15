@@ -12,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //cool migrations
         DB::unprepared('
         drop table if exists Reservations;
         create table Reservations(
