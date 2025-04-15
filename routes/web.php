@@ -4,16 +4,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 // peopel
 Route::get('/peopel', [PersonController::class, 'index'])->name('peopel.index');
-// edit
+//edit
+
 Route::get('/peopel/edit/{id}', [PersonController::class, 'edit'])->name('peopel.edit');
-// update
-Route::post('/peopel/update/{id}', [PersonController::class, 'update'])->name('peopel.update');
+Route::patch('/peopel/update/{id}', [PersonController::class, 'update'])->name('peopel.update');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -40,7 +40,7 @@ class Person extends Model
     // Define the relationship with Contact
     public function contacts()
     {
-        return $this->hasMany(Contact::class, 'person_id', 'Id');
+        return $this->belongsTo(Contact::class, 'person_id', 'Id');
     }
     
 }
