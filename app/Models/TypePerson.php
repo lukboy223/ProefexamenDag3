@@ -25,6 +25,6 @@ class TypePerson extends Model
     // Define the relationship with Person
     public function people()
     {
-        return $this->hasMany(Person::class, 'TypePeopelId', 'Id');
+        return $this->hasMany(Person::class, 'TypepeopleId', 'Id');
     }
 }

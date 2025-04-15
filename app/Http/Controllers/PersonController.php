@@ -7,6 +7,7 @@ use App\Models\Person;
 use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log;
 
 class PersonController extends Controller
 {
@@ -22,36 +23,42 @@ class PersonController extends Controller
         try {
             if ($date) {
                 // Filter op datum (bijv. created_at in je view)
-                $peopel = DB::table('peopel')
+                $people = DB::table('people')
                     ->whereDate('created_at', '=', $date)
+                    ->leftJoin('contacts', 'people.id', '=', 'contacts.person_id')
+                    ->leftJoin('typepeople', 'people.type_id', '=', 'typepeople.id')
+                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.adult', 'typepeople.TypeName', 'people.created_at')
                     ->leftJoin('contacts', 'peopel.id', '=', 'contacts.person_id')
                     ->select('peopel.name', 'contacts.phone', 'contacts.email', 'peopel.adult', 'peopel.created_at'
                     , 'peopel.Id')
                     ->get();
+            } else {
+                // Gebruik de stored procedure als er geen datum is
+                $people = DB::select('CALL GetAllpeopleWithContactInfo()');
                 } else {
                     // Gebruik de stored procedure als er geen datum is
                     $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
                     // dd($peopel);
             }
         } catch (\Exception $e) {
-            \Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
-            $peopel = collect(); // lege collection
+            Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
+            $people = collect(); // lege collection
         }
         // Debugging: Uncomment the line below to see the SQL query
         // dd($query->toSql(), $query->getBindings());
         // dd($peopel);
         //dd($peopel->first()->contacts);
         // Maak een paginator
-        $total = count($peopel);
-        $peopel = new \Illuminate\Pagination\LengthAwarePaginator(
-            $peopel,
+        $total = count($people);
+        $people = new \Illuminate\Pagination\LengthAwarePaginator(
+            $people,
             $total,
             $perPage,
             $page,
             ['path' => $request->url(), 'query' => $request->query()]
         );
     
-        return view('peopel.index', ['peopel' => $peopel, 'selectedDate' => $date]);
+        return view('people.index', ['people' => $people, 'selectedDate' => $date]);
     }
     
     public function edit($id)

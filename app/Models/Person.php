@@ -10,7 +10,7 @@ class Person extends Model
     use HasFactory;
     
     // Map this model to the actual table name
-    protected $table = 'Peopel';
+    // protected $table = 'people';
     
     // Specify the primary key
     protected $primaryKey = 'Id';
@@ -21,7 +21,7 @@ class Person extends Model
     
     // Allow mass assignment
     protected $fillable = [
-        'TypePeopelId',
+        'TypepeopleId',
         'FirstName',
         'Infix',
         'LastName',
@@ -34,13 +34,6 @@ class Person extends Model
     // Define the relationship with TypePerson
     public function typePerson()
     {
-        return $this->belongsTo(TypePerson::class, 'TypePeopelId', 'Id');
+        return $this->belongsTo(TypePerson::class, 'TypepeopleId', 'Id');
     }
-
-    // Define the relationship with Contact
-    public function contacts()
-    {
-        return $this->belongsTo(Contact::class, 'person_id', 'Id');
-    }
-    
 }

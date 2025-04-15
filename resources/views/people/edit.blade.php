@@ -66,7 +66,7 @@
                     <!-- Adult checkbox -->
                     <div>
                         <label class="inline-flex items-center">
-                            <input type="checkbox" name="Adult" value="1" {{ old('Adult', $person->Adult) ? 'checked' : '' }} 
+                            <input type="checkbox" name="Adult" value="{{ old('Adult', $person->Adult) ? 'checked' : '' }}"
                                 class="rounded border-gray-300 text-bordeaux focus:border-bordeaux focus:ring focus:ring-bordeaux focus:ring-opacity-50" required >
                             <span class="ml-2">Volwassen</span>
                         </label>

@@ -12,7 +12,8 @@ class TypePersonSeeder extends Seeder
         DB::table('TypePeople')->insert([
             ['Id' => 1, 'Name' => 'Klant'],
             ['Id' => 2, 'Name' => 'Medewerker'],
-            ['Id' => 3, 'Name' => 'Gast'],
+            ['Id' => 3, 'Name' => 'Gast']
         ]);
     }
 }
+// cool 

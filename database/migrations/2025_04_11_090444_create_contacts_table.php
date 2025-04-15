@@ -16,7 +16,7 @@ return new class extends Migration
         DROP TABLE IF EXISTS Contacts;
         CREATE TABLE Contacts (
             Id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            PeopelId INT UNSIGNED NOT NULL,
+            PeopleId INT UNSIGNED NOT NULL,
             Phone VARCHAR(10) NOT NULL,
             Email VARCHAR(50) NOT NULL,
             IsActive BIT NOT NULL DEFAULT 1,
@@ -24,7 +24,7 @@ return new class extends Migration
             DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6),
             DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6),
             PRIMARY KEY (Id),
-            FOREIGN KEY (PeopelId) REFERENCES Peopel(Id)
+            FOREIGN KEY (PeopleId) REFERENCES People(Id)
         ) ENGINE=INNODB;
         ');
     }
@@ -37,3 +37,4 @@ return new class extends Migration
         DB::unprepared('DROP TABLE IF EXISTS Contacts');
     }
 };
+// cool 

@@ -21,16 +21,16 @@ class Contact extends Model
     
     // Allow mass assignment
     protected $fillable = [
-        'PeopelId',
+        'peopleId',
         'Phone',
         'Email',
         'IsActive',
         'Opmerking'
     ];
     
-    // Define the relationship with Person/Peopel
+    // Define the relationship with Person/people
     public function person()
     {
-        return $this->belongsTo(Person::class, 'person_id', 'Id');
-    }    
+        return $this->belongsTo(Person::class, 'peopleId', 'Id');
+    }
 }

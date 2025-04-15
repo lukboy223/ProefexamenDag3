@@ -15,7 +15,7 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'PeopelId' => Person::inRandomOrder()->first()->Id ?? 1,
+            'peopleId' => Person::inRandomOrder()->first()->Id ?? 1,
             // Generate a 10-digit string without formatting
             'Phone' => substr(preg_replace('/[^0-9]/', '', $this->faker->phoneNumber()), 0, 10),
             'Email' => $this->faker->safeEmail(),

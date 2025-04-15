@@ -36,3 +36,4 @@ return new class extends Migration
         DB::unprepared('DROP TABLE IF EXISTS TypePeople');
     }
 };
+// cool 
