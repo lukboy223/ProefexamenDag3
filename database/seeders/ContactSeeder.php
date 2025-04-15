@@ -18,3 +18,4 @@ class ContactSeeder extends Seeder
         ]);
     }
 }
+// cool 

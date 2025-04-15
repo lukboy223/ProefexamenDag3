@@ -133,3 +133,4 @@ return new class extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopleByTypeWithContactInfo');
     }
 };
+// cool 

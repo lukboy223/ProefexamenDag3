@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('cookie123')
         ]);
 
+        //calls other seeders
         $this->call([
             TypePersonSeeder::class,
             PersonSeeder::class,
