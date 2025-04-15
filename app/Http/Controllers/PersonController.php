@@ -15,23 +15,30 @@ class PersonController extends Controller
         $offset = ($page - 1) * $perPage;
     
         $date = $request->input('datum');
+        $errorMessage = null;
     
         try {
             if ($date) {
-                // Filter op datum (bijv. created_at in je view)
+                // Filter op datum
                 $peopel = DB::table('peopel')
                     ->whereDate('created_at', '=', $date)
                     ->leftJoin('contacts', 'peopel.id', '=', 'contacts.person_id')
                     ->leftJoin('typepeople', 'peopel.type_id', '=', 'typepeople.id')
-                    ->select('peopel.name', 'contacts.phone', 'contacts.email', 'peopel.adult', 'typepeople.TypeName', 'peopel.created_at')
+                    ->select('peopel.FirstName', 'peopel.Infix', 'peopel.LastName', 'contacts.Phone', 'contacts.Email', 'peopel.Adult', 'typepeople.TypeName', 'peopel.created_at')
+                    ->orderBy('peopel.LastName', 'asc')
                     ->get();
+    
+                if ($peopel->isEmpty()) {
+                    $errorMessage = "Er is geen informatie beschikbaar voor deze geselecteerde datum ($date).";
+                }
             } else {
-                // Gebruik de stored procedure als er geen datum is
-                $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
+                // Gebruik stored procedure
+                $peopel = collect(DB::select('CALL GetAllPeopelWithContactInfo()'));
             }
         } catch (\Exception $e) {
             \Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
-            $peopel = collect(); // lege collection
+            $peopel = collect();
+            $errorMessage = "Er is iets misgegaan bij het ophalen van de gegevens.";
         }
     
         // Maak een paginator
@@ -44,7 +51,10 @@ class PersonController extends Controller
             ['path' => $request->url(), 'query' => $request->query()]
         );
     
-        return view('peopel.index', ['peopel' => $peopel, 'selectedDate' => $date]);
+        return view('peopel.index', [
+            'peopel' => $peopel,
+            'selectedDate' => $date,
+            'errorMessage' => $errorMessage,
+        ]);
     }
-    
 }

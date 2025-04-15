@@ -26,7 +26,6 @@
                             <th class="px-6 py-3 text-left border border-gray-300">Mobiel</th>
                             <th class="px-6 py-3 text-left border border-gray-300">Email</th>
                             <th class="px-6 py-3 text-left border border-gray-300">Volwassen</th>
-                            <th class="px-6 py-3 text-left border border-gray-300">Type</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +46,6 @@
                                     <td class="px-6 border py-3 text-black">{{ $person->Phone ?? '-' }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Email ?? '-' }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Adult ? 'Ja' : 'Nee' }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->TypePeopel ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         @endif

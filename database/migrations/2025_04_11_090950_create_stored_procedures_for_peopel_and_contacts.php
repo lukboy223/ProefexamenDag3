@@ -118,6 +118,46 @@ return new class extends Migration
                 tp.Id = typePeopelName;
         END
     ');
+
+
+    // Verwijder de stored procedure als deze al bestaat
+    // DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelBeforeDateWithContactInfo');
+
+    // // Stored Procedure: GetPeopelBeforeDateWithContactInfo
+    // DB::unprepared('
+    // CREATE PROCEDURE GetPeopelBeforeDateWithContactInfo(IN selectedDate DATE)
+    // BEGIN
+    //     SELECT 
+    //         p.Id AS PeopelId,
+    //         p.FirstName,
+    //         p.Infix,
+    //         p.LastName,
+    //         p.PreferredName,
+    //         CASE 
+    //             WHEN p.Adult = 1 THEN "Ja"
+    //             WHEN p.Adult = 0 THEN "Nee"
+    //             ELSE "Onbekend"
+    //         END AS Adult,
+    //         tp.Name AS TypePeopel,
+    //         c.Phone,
+    //         c.Email,
+    //         c.Opmerking AS ContactOpmerking,
+    //         p.Opmerking AS PeopelOpmerking,
+    //         p.DatumAangemaakt,
+    //         p.DatumGewijzigd
+    //     FROM 
+    //         Peopel p
+    //     LEFT JOIN 
+    //         TypePeople tp ON p.TypePeopelId = tp.Id
+    //     LEFT JOIN 
+    //         Contacts c ON p.Id = c.PeopelId
+    //     WHERE 
+    //         p.DatumAangemaakt <= selectedDate
+    //     ORDER BY 
+    //         p.LastName ASC;
+    // END
+    // ');
+
     }
 
     /**
@@ -131,5 +171,6 @@ return new class extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelWithContactInfo');
         DB::unprepared('DROP PROCEDURE IF EXISTS GetAllPeopelWithContactInfo');
         DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelByTypeWithContactInfo');
+        // DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelBeforeDateWithContactInfo');
     }
 };
