@@ -1,12 +1,18 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\PersonController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// people
+Route::get('/people', [PersonController::class, 'index'])->name('people.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,4 +33,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+//all routes for scores
+Route::middleware('auth')->group(function (){
+    //index with all reservations
+    Route::get('/Reservaties', [ResultController::class, 'index'])->name('results.index');
+
+    //shows the scores per reservation
+    Route::get('/Reservaties/resultaten/{id}', [ResultController::class, 'show'])->name('results.show');
+
+    //edit form for 1 score
+    Route::get('/Reservaties/resultaten/aanpassen/{id}', [ResultController::class, 'edit'])->name('results.edit');
+
+    //updates the score
+    Route::patch('/Reservaties/resultaten/update/{id}', [ResultController::class, 'update'])->name('results.update');
+});
+
 require __DIR__.'/auth.php';
+

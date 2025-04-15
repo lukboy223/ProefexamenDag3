@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Providers;
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // set max string length 191
-schema::defaultStringLength(191);
+
+        Schema::defaultStringLength(191);
+
     }
 }
