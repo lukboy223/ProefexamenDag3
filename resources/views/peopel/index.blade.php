@@ -26,13 +26,13 @@
                             <th class="px-6 py-3 text-left border border-gray-300">Mobiel</th>
                             <th class="px-6 py-3 text-left border border-gray-300">Email</th>
                             <th class="px-6 py-3 text-left border border-gray-300">Volwassen</th>
-                            <th class="px-6 py-3 text-left border border-gray-300">Type</th>
+                            <th class="px-6 py-3 text-left border border-gray-300">Aanpassen</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($peopel->isEmpty())
                             <tr>
-                                <td colspan="5" class="text-center text-red-600 bg-yellow-100 py-4">
+                                <td colspan="5" class="text-center text-black-500 bg-red-500 py-4">
                                     @if(request('datum'))
                                         Er is geen informatie beschikbaar voor deze geselecteerde datum ({{ request('datum') }}).
                                     @else
@@ -47,7 +47,10 @@
                                     <td class="px-6 border py-3 text-black">{{ $person->Phone ?? '-' }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Email ?? '-' }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Adult ? 'Ja' : 'Nee' }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->TypePeopel ?? '-' }}</td>
+                                    <!-- update -->
+                                    <td class="px-6 border py-3 text-black">
+                                        <a href="{{ route('peopel.edit', $person->Id) }}" class="text-blue-500 hover:text-blue-700">Aanpassen</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif

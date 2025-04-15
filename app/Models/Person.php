@@ -36,4 +36,11 @@ class Person extends Model
     {
         return $this->belongsTo(TypePerson::class, 'TypePeopelId', 'Id');
     }
+
+    // Define the relationship with Contact
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'person_id', 'Id');
+    }
+    
 }

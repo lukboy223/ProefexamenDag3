@@ -3,48 +3,81 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Person;
+use App\Models\Contact;
 
 class PersonController extends Controller
 {
-    // overview
+    // Overzichtspagina met optionele datumfilter en paginatie
     public function index(Request $request)
     {
         $perPage = 25;
-        $page = $request->input('page', 1);
-        $offset = ($page - 1) * $perPage;
-    
         $date = $request->input('datum');
-    
+
         try {
+            $query = Person::with('contacts');
+
             if ($date) {
-                // Filter op datum (bijv. created_at in je view)
-                $peopel = DB::table('peopel')
-                    ->whereDate('created_at', '=', $date)
-                    ->leftJoin('contacts', 'peopel.id', '=', 'contacts.person_id')
-                    ->leftJoin('typepeople', 'peopel.type_id', '=', 'typepeople.id')
-                    ->select('peopel.name', 'contacts.phone', 'contacts.email', 'peopel.adult', 'typepeople.TypeName', 'peopel.created_at')
-                    ->get();
-            } else {
-                // Gebruik de stored procedure als er geen datum is
-                $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
+                $query->whereDate('DatumAangemaakt', $date);
             }
+
+            $peopel = $query->paginate($perPage)->appends(['datum' => $date]);
+
         } catch (\Exception $e) {
-            \Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
+            \Log::error('Fout bij ophalen van personen: ' . $e->getMessage());
             $peopel = collect(); // lege collection
         }
-    
-        // Maak een paginator
-        $total = count($peopel);
-        $peopel = new \Illuminate\Pagination\LengthAwarePaginator(
-            $peopel,
-            $total,
-            $perPage,
-            $page,
-            ['path' => $request->url(), 'query' => $request->query()]
-        );
-    
-        return view('peopel.index', ['peopel' => $peopel, 'selectedDate' => $date]);
+
+        return view('peopel.index', [
+            'peopel' => $peopel,
+            'selectedDate' => $date
+        ]);
     }
-    
+
+    // Bewerken van één persoon + bijbehorende contacten
+    public function edit($id)
+    {
+        $person = Person::with('contacts')->findOrFail($id);
+        return view('peopel.edit', ['person' => $person]);
+    }
+
+    // Bijwerken van de gegevens van een persoon
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'FirstName' => 'required|string|max:50',
+            'Infix' => 'nullable|string|max:10',
+            'LastName' => 'required|string|max:50',
+            'PreferredName' => 'required|string|max:50',
+            'Adult' => 'required|boolean',
+            'contacts.*.phone' => 'nullable|string|max:255',
+            'contacts.*.email' => 'nullable|email|max:255',
+        ]);
+
+        $person = Person::findOrFail($id);
+        $person->update([
+            'FirstName' => $request->input('FirstName'),
+            'Infix' => $request->input('Infix'),
+            'LastName' => $request->input('LastName'),
+            'PreferredName' => $request->input('PreferredName'),
+            'Adult' => $request->input('Adult'),
+        ]);
+
+        // Contactgegevens bijwerken of toevoegen
+        if ($request->has('contacts')) {
+            foreach ($request->input('contacts') as $contactData) {
+                Contact::updateOrCreate(
+                    [
+                        'person_id' => $person->Id,
+                        'phone' => $contactData['phone'] ?? null,
+                    ],
+                    [
+                        'email' => $contactData['email'] ?? null,
+                    ]
+                );
+            }
+        }
+
+        return redirect()->route('peopel.index')->with('success', 'Persoon succesvol bijgewerkt.');
+    }
 }

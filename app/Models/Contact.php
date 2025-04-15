@@ -31,6 +31,6 @@ class Contact extends Model
     // Define the relationship with Person/Peopel
     public function person()
     {
-        return $this->belongsTo(Person::class, 'PeopelId', 'Id');
-    }
+        return $this->belongsTo(Person::class, 'person_id', 'Id');
+    }    
 }

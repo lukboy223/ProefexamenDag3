@@ -10,6 +10,10 @@ Route::get('/', function () {
 
 // peopel
 Route::get('/peopel', [PersonController::class, 'index'])->name('peopel.index');
+// edit
+Route::get('/peopel/edit/{id}', [PersonController::class, 'edit'])->name('peopel.edit');
+// update
+Route::post('/peopel/update/{id}', [PersonController::class, 'update'])->name('peopel.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
