@@ -117,6 +117,7 @@ return new class extends Migration
             WHERE 
                 tp.Id = typePeopleName;
         END
+
     ');
     }
 

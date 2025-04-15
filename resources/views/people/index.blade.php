@@ -26,13 +26,13 @@
                             <th class="px-6 py-3 text-left border border-gray-300">Mobiel</th>
                             <th class="px-6 py-3 text-left border border-gray-300">Email</th>
                             <th class="px-6 py-3 text-left border border-gray-300">Volwassen</th>
-                            <th class="px-6 py-3 text-left border border-gray-300">Type</th>
+                            <th class="px-6 py-3 text-left border border-gray-300">Aanpassen</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($people->isEmpty())
                             <tr>
-                                <td colspan="5" class="text-center text-red-600 bg-yellow-100 py-4">
+                                <td colspan="5" class="text-center text-black-500 bg-red-500 py-4">
                                     @if(request('datum'))
                                         Er is geen informatie beschikbaar voor deze geselecteerde datum ({{ request('datum') }}).
                                     @else
@@ -41,15 +41,18 @@
                                 </td>
                             </tr>
                         @else
-                            @foreach($people as $person)
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 border py-3 text-black">{{ $person->FirstName }} {{ $person->Infix }} {{ $person->LastName }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->Phone ?? '-' }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->Email ?? '-' }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->Adult ? 'Ja' : 'Nee' }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->Typepeople ?? '-' }}</td>
-                                </tr>
-                            @endforeach
+                        @foreach($peopel as $person)
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 border py-3 text-black">{{ $person->FirstName }} {{ $person->Infix }} {{ $person->LastName }}</td>
+                                <td class="px-6 border py-3 text-black">{{ $person->Phone ?? '-' }}</td>
+                                <td class="px-6 border py-3 text-black">{{ $person->Email ?? '-' }}</td>
+                                <td class="px-6 border py-3 text-black">{{ $person->Adult ? 'Ja' : 'Nee' }}</td>
+                                <td class="px-6 border py-3 text-black">
+                                    <a href="{{ route('peopel.edit', ['id' => $person->PeopelId]) }}" class="text-blue-500 hover:text-blue-700">Aanpassen</a>
+                                </td>
+                            </tr>
+                        @endforeach
+
                         @endif
                     </tbody>
                 </table>
@@ -61,10 +64,10 @@
                     </a>
                 </div>
 
-                <!-- Paginatie Links
-                <div class="mt-6">
-                    {{ $people->links() }}
+                <!-- <div class="mt-6">
+                    {{ $peopel->links() }}
                 </div> -->
+
             </div>
         </div>
     </body>
