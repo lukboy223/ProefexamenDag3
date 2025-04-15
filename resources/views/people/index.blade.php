@@ -11,7 +11,7 @@
             @endif
 
             <!-- Zoek formulier -->
-            <form method="GET" action="{{ route('peopel.index') }}" class="mb-6 flex justify-center items-center gap-4">
+            <form method="GET" action="{{ route('people.index') }}" class="mb-6 flex justify-center items-center gap-4">
                 <label for="datum" class="font-semibold">Zoek op datum:</label>
                 <input type="date" name="datum" id="datum" value="{{ $selectedDate ?? '' }}" class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-bordeaux">
                 <button type="submit" class="bg-bordeaux text-black px-6 py-2 rounded-lg shadow-md hover:bg-bordeaux-dark transition duration-300">Tonen</button>
@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if($peopel->isEmpty())
+                        @if($people->isEmpty())
                             <tr>
                                 <td colspan="5" class="text-center text-red-600 bg-yellow-100 py-4">
                                     @if(request('datum'))
@@ -41,13 +41,13 @@
                                 </td>
                             </tr>
                         @else
-                            @foreach($peopel as $person)
+                            @foreach($people as $person)
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 border py-3 text-black">{{ $person->FirstName }} {{ $person->Infix }} {{ $person->LastName }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Phone ?? '-' }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Email ?? '-' }}</td>
                                     <td class="px-6 border py-3 text-black">{{ $person->Adult ? 'Ja' : 'Nee' }}</td>
-                                    <td class="px-6 border py-3 text-black">{{ $person->TypePeopel ?? '-' }}</td>
+                                    <td class="px-6 border py-3 text-black">{{ $person->Typepeople ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         @endif
@@ -63,7 +63,7 @@
 
                 <!-- Paginatie Links
                 <div class="mt-6">
-                    {{ $peopel->links() }}
+                    {{ $people->links() }}
                 </div> -->
             </div>
         </div>

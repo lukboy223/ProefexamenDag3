@@ -21,7 +21,7 @@ class PersonFactory extends Factory
     {
         return [
 
-            'TypePeopelId' => TypePerson::factory(),
+            'TypepeopleId' => TypePerson::factory(),
             'FirstName' => $this->faker->firstName(),
             // Use a shorter infix with max 10 characters
             'Infix' => $this->faker->randomElement(['van', 'de', 'van der', 'van den', 'ten', '']),

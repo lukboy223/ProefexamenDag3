@@ -6,6 +6,7 @@ use App\Models\Game;
 use App\Models\Person;
 use App\Models\Reservation;
 use App\Models\Result;
+use App\Models\TypePerson;
 use Illuminate\Database\Seeder;
 use Database\Seeders\TypePersonSeeder;
 use Database\Seeders\PersonSeeder;
@@ -32,70 +33,80 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        Person::factory()->create([
-            'TypePerson' => 'klant',
-            'FirstName' => 'Mazin',
-            'Infix' => '',
-            'LastName' => 'jamil',
-            'CallName' => 'Mazin',
-            'IsAdult' => true,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'klant',
-            'FirstName' => 'Arjan',
-            'Infix' => 'de',
-            'LastName' => 'Ruijter',
-            'CallName' => 'Arjan',
-            'IsAdult' => true,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'klant',
-            'FirstName' => 'Hans',
-            'Infix' => '',
-            'LastName' => 'Odijk',
-            'CallName' => 'Hans',
-            'IsAdult' => true,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'klant',
-            'FirstName' => 'Dennis',
-            'Infix' => 'van',
-            'LastName' => 'Wakeren',
-            'CallName' => 'Dennis',
-            'IsAdult' => true,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'Medewerker',
-            'FirstName' => 'Wilco',
-            'Infix' => 'Van de',
-            'LastName' => 'Grift',
-            'CallName' => 'Wilco',
-            'IsAdult' => true,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'Gast',
-            'FirstName' => 'Tom',
-            'Infix' => '',
-            'LastName' => 'Sanders',
-            'CallName' => 'Tom',
-            'IsAdult' => false,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'Gast',
-            'FirstName' => 'Andrew',
-            'Infix' => '',
-            'LastName' => 'Sanders',
-            'CallName' => 'Andrew',
-            'IsAdult' => false,
-        ]);
-        Person::factory()->create([
-            'TypePerson' => 'Gast',
-            'FirstName' => 'Julian',
-            'Infix' => '',
-            'LastName' => 'Kaldenheuvel',
-            'CallName' => 'Julian',
-            'IsAdult' => true,
-        ]);
+        // TypePerson::factory()->create([
+        //     'Name' => 'Klant'
+        // ]);
+        // TypePerson::factory()->create([
+        //     'Name' => 'Medewerker'
+        // ]);
+        // TypePerson::factory()->create([
+        //     'Name' => 'Gast'
+        // ]);
+
+        // Person::factory()->create([
+        //     'TypePeopleId' => '1',
+        //     'FirstName' => 'Mazin',
+        //     'Infix' => '',
+        //     'LastName' => 'jamil',
+        //     'CallName' => 'Mazin',
+        //     'IsAdult' => true,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '1',
+        //     'FirstName' => 'Arjan',
+        //     'Infix' => 'de',
+        //     'LastName' => 'Ruijter',
+        //     'CallName' => 'Arjan',
+        //     'IsAdult' => true,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '1',
+        //     'FirstName' => 'Hans',
+        //     'Infix' => '',
+        //     'LastName' => 'Odijk',
+        //     'CallName' => 'Hans',
+        //     'IsAdult' => true,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '1',
+        //     'FirstName' => 'Dennis',
+        //     'Infix' => 'van',
+        //     'LastName' => 'Wakeren',
+        //     'CallName' => 'Dennis',
+        //     'IsAdult' => true,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '2',
+        //     'FirstName' => 'Wilco',
+        //     'Infix' => 'Van de',
+        //     'LastName' => 'Grift',
+        //     'CallName' => 'Wilco',
+        //     'IsAdult' => true,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '3',
+        //     'FirstName' => 'Tom',
+        //     'Infix' => '',
+        //     'LastName' => 'Sanders',
+        //     'CallName' => 'Tom',
+        //     'IsAdult' => false,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '3',
+        //     'FirstName' => 'Andrew',
+        //     'Infix' => '',
+        //     'LastName' => 'Sanders',
+        //     'CallName' => 'Andrew',
+        //     'IsAdult' => false,
+        // ]);
+        // Person::factory()->create([
+        //     'TypePeopleId' => '3',
+        //     'FirstName' => 'Julian',
+        //     'Infix' => '',
+        //     'LastName' => 'Kaldenheuvel',
+        //     'CallName' => 'Julian',
+        //     'IsAdult' => true,
+        // ]);
 
         Reservation::factory()->create([
             'PersonId' => '1',

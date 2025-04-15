@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PersonController extends Controller
 {
@@ -19,32 +20,32 @@ class PersonController extends Controller
         try {
             if ($date) {
                 // Filter op datum (bijv. created_at in je view)
-                $peopel = DB::table('peopel')
+                $people = DB::table('people')
                     ->whereDate('created_at', '=', $date)
-                    ->leftJoin('contacts', 'peopel.id', '=', 'contacts.person_id')
-                    ->leftJoin('typepeople', 'peopel.type_id', '=', 'typepeople.id')
-                    ->select('peopel.name', 'contacts.phone', 'contacts.email', 'peopel.adult', 'typepeople.TypeName', 'peopel.created_at')
+                    ->leftJoin('contacts', 'people.id', '=', 'contacts.person_id')
+                    ->leftJoin('typepeople', 'people.type_id', '=', 'typepeople.id')
+                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.adult', 'typepeople.TypeName', 'people.created_at')
                     ->get();
             } else {
                 // Gebruik de stored procedure als er geen datum is
-                $peopel = DB::select('CALL GetAllPeopelWithContactInfo()');
+                $people = DB::select('CALL GetAllpeopleWithContactInfo()');
             }
         } catch (\Exception $e) {
-            \Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
-            $peopel = collect(); // lege collection
+            Log::error('Fout bij ophalen van gegevens: ' . $e->getMessage());
+            $people = collect(); // lege collection
         }
     
         // Maak een paginator
-        $total = count($peopel);
-        $peopel = new \Illuminate\Pagination\LengthAwarePaginator(
-            $peopel,
+        $total = count($people);
+        $people = new \Illuminate\Pagination\LengthAwarePaginator(
+            $people,
             $total,
             $perPage,
             $page,
             ['path' => $request->url(), 'query' => $request->query()]
         );
     
-        return view('peopel.index', ['peopel' => $peopel, 'selectedDate' => $date]);
+        return view('people.index', ['people' => $people, 'selectedDate' => $date]);
     }
     
 }

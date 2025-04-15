@@ -16,7 +16,7 @@ return new class extends Migration
         drop table if exists People;
         create table People(
          Id int unsigned not null auto_increment
-        ,TypePerson varchar(50) not null
+        ,TypePeopleId INT UNSIGNED NOT NULL
         ,FirstName varchar(50) not null
         ,Infix varchar(10) null default null
         ,LastName varchar(50) not null
@@ -28,6 +28,7 @@ return new class extends Migration
         ,Created_at datetime(6) not null default now(6)
         ,Updated_at datetime(6) not null default now(6)
         ,primary key (Id)
+        ,foreign key (TypePeopleId) references TypePeople(Id)
         )engine=innoDB;
         ');
     }

@@ -9,8 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// peopel
-Route::get('/peopel', [PersonController::class, 'index'])->name('peopel.index');
+// people
+Route::get('/people', [PersonController::class, 'index'])->name('people.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

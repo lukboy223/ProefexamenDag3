@@ -13,71 +13,71 @@ return new class extends Migration
     public function up()
     {
         // Verwijder de stored procedures als ze al bestaan
-        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelWithContactInfo');
-        // Stored Procedure 1: GetPeopelWithContactInfo
+        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopleWithContactInfo');
+        // Stored Procedure 1: GetpeopleWithContactInfo
         DB::unprepared('
-        CREATE PROCEDURE GetPeopelWithContactInfo(IN peopelId INT)
+        CREATE PROCEDURE GetPeopleWithContactInfo(IN peopleId INT)
         BEGIN
             SELECT 
-                p.Id AS PeopelId,
+                p.Id AS PeopleId,
                 p.FirstName,
                 p.Infix,
                 p.LastName,
-                p.PreferredName,
+                p.CallName as PreferredName,
                 CASE 
-                    WHEN p.Adult = 1 THEN "Ja"
-                    WHEN p.Adult = 0 THEN "Nee"
+                    WHEN p.IsAdult = 1 THEN "Ja"
+                    WHEN p.IsAdult = 0 THEN "Nee"
                     ELSE "Onbekend"
                 END AS Adult,
-                tp.Name AS TypePeopel,
+                tp.Name AS TypePeople,
                 c.Phone,
                 c.Email,
                 c.Opmerking AS ContactOpmerking,
-                p.Opmerking AS PeopelOpmerking,
-                p.DatumAangemaakt,
-                p.DatumGewijzigd
+                p.Note AS peopleOpmerking,
+                p.created_at as DatumAangemaakt,
+                p.updated_at as DatumGewijzigd
             FROM 
-                Peopel p
+                People p
             LEFT JOIN 
-                TypePeople tp ON p.TypePeopelId = tp.Id
+                TypePeople tp ON p.TypePeopleId = tp.Id
             LEFT JOIN 
-                Contacts c ON p.Id = c.PeopelId
+                Contacts c ON p.Id = c.PeopleId
             WHERE 
-                p.Id = peopelId;
+                p.Id = peopleId;
         END
     ');
     
 
         // Verwijder de stored procedures als ze al bestaan
-        DB::unprepared('DROP PROCEDURE IF EXISTS GetAllPeopelWithContactInfo');
-        // Stored Procedure 2: GetAllPeopelWithContactInfo
+        DB::unprepared('DROP PROCEDURE IF EXISTS GetAllPeopleWithContactInfo');
+        // Stored Procedure 2: GetAllpeopleWithContactInfo
         DB::unprepared('
-        CREATE PROCEDURE GetAllPeopelWithContactInfo()
+        CREATE PROCEDURE GetAllPeopleWithContactInfo()
         BEGIN
             SELECT 
-                p.Id AS PeopelId,
+                p.Id AS PeopleId,
                 p.FirstName,
                 p.Infix,
                 p.LastName,
-                p.PreferredName,
+                p.CallName as PreferredName,
                 CASE 
-                    WHEN p.Adult = 1 THEN "Ja"
-                    WHEN p.Adult = 0 THEN "Nee"
+                    WHEN p.IsAdult = 1 THEN "Ja"
+                    WHEN p.IsAdult = 0 THEN "Nee"
                     ELSE "Onbekend"
                 END AS Adult,
-                tp.Name AS TypePeopel,
+                tp.Name AS TypePeople,
                 c.Phone,
                 c.Email,
                 c.Opmerking AS ContactOpmerking,
-                p.Opmerking AS PeopelOpmerking,
-                p.DatumAangemaakt,
-                p.DatumGewijzigd
+                p.Note AS peopleOpmerking,
+                p.created_at as DatumAangemaakt,
+                p.updated_at as DatumGewijzigd
             FROM 
-                Peopel p
+                People p
             LEFT JOIN 
-                TypePeople tp ON p.TypePeopelId = tp.Id
+                TypePeople tp ON p.TypePeopleId = tp.Id
             LEFT JOIN 
-                Contacts c ON p.Id = c.PeopelId
+                Contacts c ON p.Id = c.PeopleId
             ORDER BY 
                 p.LastName ASC;
         END
@@ -85,37 +85,37 @@ return new class extends Migration
     
 
         // Verwijder de stored procedures als ze al bestaan
-        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelByTypeWithContactInfo');
-        // Stored Procedure 3: GetPeopelByTypeWithContactInfo
+        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopleByTypeWithContactInfo');
+        // Stored Procedure 3: GetpeopleByTypeWithContactInfo
         DB::unprepared('
-        CREATE PROCEDURE GetPeopelByTypeWithContactInfo(IN typePeopelName VARCHAR(50))
+        CREATE PROCEDURE GetPeopleByTypeWithContactInfo(IN typePeopleName VARCHAR(50))
         BEGIN
             SELECT 
-                p.Id AS PeopelId,
+                p.Id AS PeopleId,
                 p.FirstName,
                 p.Infix,
                 p.LastName,
-                p.PreferredName,
+                p.CallName as PreferredName,
                 CASE 
-                    WHEN p.Adult = 1 THEN "Ja"
-                    WHEN p.Adult = 0 THEN "Nee"
+                    WHEN p.IsAdult = 1 THEN "Ja"
+                    WHEN p.IsAdult = 0 THEN "Nee"
                     ELSE "Onbekend"
                 END AS Adult,
-                tp.Name AS TypePeopel,
+                tp.Name AS Typepeople,
                 c.Phone,
                 c.Email,
                 c.Opmerking AS ContactOpmerking,
-                p.Opmerking AS PeopelOpmerking,
-                p.DatumAangemaakt,
-                p.DatumGewijzigd
+                p.Note AS peopleOpmerking,
+                p.created_at as DatumAangemaakt,
+                p.updated_at as DatumGewijzigd
             FROM 
-                Peopel p
+                People p
             LEFT JOIN 
-                TypePeople tp ON p.TypePeopelId = tp.Id
+                TypePeople tp ON p.TypePeopleId = tp.Id
             LEFT JOIN 
-                Contacts c ON p.Id = c.PeopelId
+                Contacts c ON p.Id = c.peopleId
             WHERE 
-                tp.Id = typePeopelName;
+                tp.Id = typePeopleName;
         END
     ');
     }
@@ -128,8 +128,8 @@ return new class extends Migration
     public function down()
     {
         // Verwijder de stored procedures als de migratie wordt teruggedraaid
-        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelWithContactInfo');
-        DB::unprepared('DROP PROCEDURE IF EXISTS GetAllPeopelWithContactInfo');
-        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopelByTypeWithContactInfo');
+        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopleWithContactInfo');
+        DB::unprepared('DROP PROCEDURE IF EXISTS GetAllPeopleWithContactInfo');
+        DB::unprepared('DROP PROCEDURE IF EXISTS GetPeopleByTypeWithContactInfo');
     }
 };
