@@ -17,7 +17,7 @@
     </div>
     @endif
     <div class="overflow-x-auto">
-        <form action="{{ route('results.update', $result->Id) }} " method="post"
+        <form action="{{ route('results.update', [$result->Id, $resId] ) }} " method="post"
             class="w-3/4 bg-white m-auto mt-5 mb-5 p-5 rounded shadow-md just" style="padding: 1em">
             @method('Patch')
             @csrf

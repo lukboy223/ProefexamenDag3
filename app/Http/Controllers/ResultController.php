@@ -81,7 +81,7 @@ class ResultController extends Controller
 
             //redirect the user to the index page with all the results
             if($results->isEmpty()){
-                return redirect()->route('results.index')->with('error', 'Geen scores bij deze Reservation gevonden');
+                return redirect()->route('results.index')->with('error', 'Van de geselecteerde reservering zijn geen uitslagen bekent');
             }
 
             return view('Results.show', ['results' => $results]);
@@ -96,7 +96,7 @@ class ResultController extends Controller
             );
         }
     }
-    public function edit($id)
+    public function edit($id, $resId)
     {
         //try catch for the stored procedure
         try {
@@ -107,7 +107,7 @@ class ResultController extends Controller
                 $result[0]->AmountPoints = 0;
             }
 
-            return view('Results.edit', ['result' => $result[0]]);
+            return view('Results.edit', ['result' => $result[0], 'resId' => $resId]);
 
         } catch (\Exception $e) {
               // Logs the error if asking the data fails
@@ -121,7 +121,7 @@ class ResultController extends Controller
         }
     }
 
-    public function update($id, Request $request) {
+    public function update($id, $resId, Request $request) {
 
         //validates the data
         $request->validate([
@@ -133,7 +133,7 @@ class ResultController extends Controller
                 DB::select('call update_result(?, ?)', [$request->AmountPoints, $id]);
 
                 //returns user to index with success messages if updated
-                return redirect()->route('results.index')->with('success', 'score succesvol aangepast');
+                return redirect()->route('results.show', $resId)->with('success', 'score succesvol aangepast');
             }catch (\Exception $e) {
                 // Logs the error if updating fails
                 Log::error('Error loading reservations: ' . $e->getMessage());

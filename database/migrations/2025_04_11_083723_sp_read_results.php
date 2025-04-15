@@ -24,6 +24,7 @@ return new class extends Migration
 
         select
         RES.Id
+        ,GEM.ReservationId
         ,PEO.FullName
         ,RES.AmountPoints
 

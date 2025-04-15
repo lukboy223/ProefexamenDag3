@@ -43,10 +43,10 @@ Route::middleware('auth')->group(function (){
     Route::get('/Reservaties/resultaten/{id}', [ResultController::class, 'show'])->name('results.show');
 
     //edit form for 1 score
-    Route::get('/Reservaties/resultaten/aanpassen/{id}', [ResultController::class, 'edit'])->name('results.edit');
+    Route::get('/Reservaties/resultaten/aanpassen/{id}/{resId}', [ResultController::class, 'edit'])->name('results.edit');
 
     //updates the score
-    Route::patch('/Reservaties/resultaten/update/{id}', [ResultController::class, 'update'])->name('results.update');
+    Route::patch('/Reservaties/resultaten/update/{id}/{resId}', [ResultController::class, 'update'])->name('results.update');
 });
 
 require __DIR__.'/auth.php';

@@ -51,7 +51,7 @@
                     <td class="px-4 py-2 border-b border-gray-300  border-r">{{ $result->FullName }}</td>
                     <td class="px-4 py-2 border-b border-gray-300  border-r">{{ $result->AmountPoints }}</td>
                     <td class="px-4 py-2 border-b border-gray-300 text-white border-r"><a
-                            href="{{ route('results.edit', $result->Id) }}"
+                            href="{{ route('results.edit', [$result->Id, $result->ReservationId]) }}"
                             class="bg-green-700 p-1 rounded">Wijzigen</a></td>
                 </tr>
                 @endforeach
