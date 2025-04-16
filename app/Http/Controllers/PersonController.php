@@ -27,9 +27,9 @@ class PersonController extends Controller
                     ->whereDate('created_at', '=', $date)
                     ->leftJoin('contacts', 'people.id', '=', 'contacts.person_id')
                     ->leftJoin('typepeople', 'people.type_id', '=', 'typepeople.id')
-                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.adult', 'typepeople.TypeName', 'people.created_at')
+                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.IsAdult', 'typepeople.TypeName', 'people.created_at')
                     ->leftJoin('contacts', 'people.id', '=', 'contacts.person_id')
-                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.adult', 'people.created_at'
+                    ->select('people.name', 'contacts.phone', 'contacts.email', 'people.IsAdult', 'people.created_at'
                     , 'people.Id')
                     ->get();
             } else {
@@ -86,6 +86,11 @@ class PersonController extends Controller
     // Bijwerken van de gegevens van een persoon
     public function update(Request $request, $id)
     {
+        // Zorg dat IsAdult altijd aanwezig is
+        $request->merge([
+            'IsAdult' => $request->has('IsAdult') ? 1 : 0,
+        ]);
+
         // Validatie
         $validatedData = $request->validate([
             'FirstName' => 'required|string|max:255',
@@ -93,11 +98,11 @@ class PersonController extends Controller
             'LastName' => 'required|string|max:255',
             'Phone' => 'nullable|string|max:15',
             'Email' => 'nullable|email|max:255',
-            'Adult' => 'boolean',
+            'IsAdult' => 'boolean',
         ]);
     
         // Zet Adult op 0 als het vinkje niet is aangevinkt
-        $validatedData['Adult'] = $request->has('Adult') ? 1 : 0;
+        $validatedData['IsAdult'] = $request->has('IsAdult') ? 1 : 0;
     
         try {
             // Controleer of het e-mailadres al bestaat bij een andere klant
@@ -118,7 +123,7 @@ class PersonController extends Controller
                 'FirstName' => $validatedData['FirstName'],
                 'Infix' => $validatedData['Infix'],
                 'LastName' => $validatedData['LastName'],
-                'Adult' => $validatedData['Adult'],
+                'IsAdult' => $validatedData['IsAdult'],
             ]);
     
             // Update de contacts-tabel
@@ -133,7 +138,5 @@ class PersonController extends Controller
             Log::error('Fout bij updaten: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Er is een fout opgetreden bij het opslaan.');
         }
-    }
-    
-    
+    }    
 }

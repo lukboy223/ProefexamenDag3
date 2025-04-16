@@ -25,7 +25,7 @@
             <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
                 <form method="POST" action="{{ route('people.update', ['id' => $person->Id]) }}" class="space-y-6">
                     @csrf
-                    @method('Patch') <!-- Deze regel ontbreekt nu -->
+                    @method('PATCH') <!-- Deze regel ontbreekt nu -->
 
                     <!-- Naam velden -->
                     <div class="grid grid-cols-3 gap-4">
@@ -66,9 +66,10 @@
                     <!-- Adult checkbox -->
                     <div>
                         <label class="inline-flex items-center">
-                            <input type="checkbox" name="Adult" value="{{ old('Adult', $person->IsAdult) ? 'checked' : '' }}"
-                                class="rounded border-gray-300 text-bordeaux focus:border-bordeaux focus:ring focus:ring-bordeaux focus:ring-opacity-50" required >
-                            <span class="ml-2">Volwassen</span>
+                        <input type="checkbox" name="IsAdult" value="1"
+                        {{ old('IsAdult', $person->IsAdult) ? 'checked' : '' }}
+                        class="rounded border-gray-300 text-bordeaux focus:border-bordeaux focus:ring focus:ring-bordeaux focus:ring-opacity-50">
+                        <span class="ml-2">Volwassen</span>
                         </label>
                     </div>
                     
